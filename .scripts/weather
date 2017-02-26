@@ -1,0 +1,3 @@
+#!/bin/sh
+cat /home/s-adm/.scripts/weatmp
+exit 0

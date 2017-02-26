@@ -1,0 +1,2 @@
+sudo pacman -S xmonad xmonad-contrib xmobar numlockx compton trayer feh xfce4-power-manager gnome-keyring parcellite acpi
+yaourt -S --noconfirm alsa-utils xscreenshot polkit-gnome-gtk2 pacli
