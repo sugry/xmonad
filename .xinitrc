@@ -33,6 +33,8 @@ xrdb -merge ~/.Xresources &
 parcellite &
 nm-applet &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# этот скрипт отслеживает состояние заряда батареи и попутно готовит данные для скриптов погоды и проверки обновлений в xmobar
+# не включайте его при слабом интерент соединении
 #$HOME/.scripts/lowbatt_notify.sh &
 
 #feh --bg-center /usr/share/backgrounds/003.jpg
