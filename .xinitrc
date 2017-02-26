@@ -33,7 +33,7 @@ xrdb -merge ~/.Xresources &
 parcellite &
 nm-applet &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-$HOME/.scripts/lowbatt_notify.sh &
+#$HOME/.scripts/lowbatt_notify.sh &
 
 #feh --bg-center /usr/share/backgrounds/003.jpg
 #dropbox &
