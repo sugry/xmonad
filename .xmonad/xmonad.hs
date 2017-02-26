@@ -152,6 +152,7 @@ myManageHook = scratchpadManageHook ( W.RationalRect 0.25 0.25 0.5 0.5 ) <+> ( c
         float     = ["feh"]
         cfloat    = ["Xmessage","Gxmessage","Eog","Xscreensaver-demo","Brasero","xclock","Xscreensaver-demo","xfreerdp"]
             ++ ["SimpleScreenRecorder","Evolution-alarm-notify","Evolution","Gns3","Mtpaint","Leafpad","Запустить файл","Gpicview"]
+            ++ ["pamac-manager","pamac-updater"]
         web       = ["Chromium"]
         text      = ["Geany","Atom","Pcmanfm"]
         term      = ["lxterminal"]
