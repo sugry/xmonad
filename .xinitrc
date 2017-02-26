@@ -22,6 +22,7 @@ setxkbmap -layout "us,ru"
 setxkbmap -option "grp:caps_toggle,grp_led:caps"
 numlockx &
 perWindowLayoutD & # демон, который запоминает выбранную раскладку для каждого окна http://archlinux.org.ru/forum/topic/3124/
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 3 --transparent true --alpha 0 --tint 0x232323 --height 21 &
 compton &
 # отключаем тачпад во время набора с клавиатуры
 syndaemon -i 2 -d &
@@ -29,7 +30,6 @@ syndaemon -i 2 -d &
 # нужно узнать id тачпада командой xinput list
 #xinput disable 15
 xrdb -merge ~/.Xresources &
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 3 --transparent true --alpha 0 --tint 0x232323 --height 21 &
 parcellite &
 nm-applet &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
