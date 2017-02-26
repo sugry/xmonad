@@ -221,7 +221,7 @@ myTabConfig = def
 
 myLayoutHook =  avoidStruts 
                 $ smartBorders
-                $ gaps [(U,18)]
+                $ gaps [(U,23)]
                 $ onWorkspace (myWorkspaces !! 0) webL
                 $ onWorkspace (myWorkspaces !! 1) textL
                 $ onWorkspace (myWorkspaces !! 2) termL
