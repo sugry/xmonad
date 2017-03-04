@@ -73,13 +73,13 @@ Config {
         ] 50
         , Run Com "/home/s-adm/.scripts/xmdate" [] "xmdate" 10
         , Run Com "/home/s-adm/.scripts/xmtime" [] "xmtime" 10
-        , Run Com "/home/s-adm/.scripts/weather.sh" [] "weather" 6000
-        , Run Com "/home/s-adm/.scripts/pkg.sh" [] "update" 600
+        , Run Com "/home/s-adm/.scripts/weather.sh" [] "weather" 120
+        , Run Com "/home/s-adm/.scripts/pkg.sh" [] "update" 3600
         , Run PipeReader "/tmp/.volume-pipe" "vol"
         , Run UnsafeStdinReader
     ]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = "<fc=#0080FF>λ</fc> %UnsafeStdinReader% }{  <fc=#b4cdcd>%kbd%</fc> :: %wlp3s0% ::  <fc=#b4cdcd>%vol%</fc> :: %multicpu% %memory%  %coretemp% :: %battery% :: <fc=#b4cdcd><action=/home/s-adm/.scripts/full-weather.sh>%weather%</action></fc> ::  %xmdate%   <fc=#cccccc>%xmtime%</fc> :: <fc=#0080FF><action=urxvtc -name update -e yaourt -Syua>%update%</action></fc> "
+    , template = "<fc=#0080FF>λ</fc> %UnsafeStdinReader% }{  <fc=#b4cdcd>%kbd%</fc> :: %wlp3s0% ::  <fc=#b4cdcd>%vol%</fc> :: %multicpu% %memory%  %coretemp% :: %battery% :: <fc=#b4cdcd><action=`/home/s-adm/.scripts/full-weather.sh` button=1><action=`chromium --app=http://www.accuweather.com/ru/ru/surgut/288459/current-weather/288459` button=3>%weather%</action></action></fc> ::  %xmdate%   <fc=#cccccc>%xmtime%</fc> :: <fc=#0080FF><action=`urxvtc -name update -e yaourt -Syua` button=1><action=`xmonad --restart` button=3>%update%</action></action></fc> "
     
 }

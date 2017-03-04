@@ -29,7 +29,13 @@ urxvtd -q -f -o &
 syndaemon -i 2 -d &
 # отключаем тачпад совсем
 # нужно узнать id тачпада командой xinput list
-#xinput disable 15
+# xinput disable 15
+# Контроль состояния батареи
+/home/s-adm/.scripts/controlbatt_and_notify.sh &
+# Файл для информации о погоде - создаем/очищаем
+cat /dev/null > /home/s-adm/.scripts/weatmp &
+# /home/s-adm/.scripts/get-weather.sh
+
 xrdb -merge ~/.Xresources &
 parcellite &
 nm-applet &

@@ -150,6 +150,7 @@ mynameScratchpads = [ NS "ncmpcpp"      "urxvtc -name ncmpcpp -e ncmpcpp"     (a
                     , NS "font-manager" "font-manager"                        (className  =? "Font-manager") (customFloating $ W.RationalRect 0.2 0.2 0.6 0.6)
 
                     , NS "Organizer"    "Organizer"                           (role       =? "Organizer")    (customFloating $ W.RationalRect 0.1 0.1 0.8 0.8)
+                    , NS "Weather"      "Weather"                             (role       =? "pop-up")       (customFloating $ W.RationalRect 0.15 0.2 0.7 0.6)
                     ]
 
 -- hooks --
@@ -182,7 +183,7 @@ myManageHook = scratchpadManageHook ( W.RationalRect 0.25 0.25 0.5 0.5 ) <+> nam
         float     = ["feh"]
         cfloat    = ["Xmessage","Gxmessage","Eog","Xscreensaver-demo","Brasero","xclock","Xscreensaver-demo","xfreerdp"]
             ++ ["SimpleScreenRecorder","Evolution-alarm-notify","Evolution","Gns3","Mtpaint","Leafpad","Запустить файл","Gpicview"]
-            ++ ["pamac-manager","pamac-updater"]
+            ++ ["pamac-manager","pamac-updater","Deadbeef"]
         web       = ["Chromium"]
         text      = ["Geany","Atom","Pcmanfm"]
         term      = ["lxterminal"]
@@ -425,6 +426,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Screenshot using Scrot (selection)
     , ((modm,               xK_Print ), spawn "sleep 0.2; scrot -s '/tmp/%Y-%m-%d-%H%M%S_$wx$h.png'")
+    
+    --, ((0,                             0xff61),     spawn "scrot -q 100 -e 'mv $f ~/Pictures/.Screenshots/ 2>/dev/null'")      --Print
+    --, ((0        .|. shiftMask,        0xff61),     spawn "scrot -u -q 100 -e 'mv $f ~/Pictures/.Screenshots/ 2>/dev/null'")   --Shift+Print use the currently focused window
+    --, ((mod1Mask,                      0xff61),     spawn "scrot -s -q 100 -e 'mv $f ~/Pictures/.Screenshots/ 2>/dev/null'")   --Alt+Print interactively choose a window or rectangle with the mouse
+    --, ((0        .|. controlMask,      0xff61),     spawn "scrot -e 'mv $f ~/Pictures/.Screenshots/ 2>/dev/null'")             --Ctrl+Print
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -454,10 +460,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 10%+ && ~/.xmonad/getvolume.sh >> /tmp/.volume-pipe")  
     , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle && ~/.xmonad/getvolume.sh >> /tmp/.volume-pipe")
     -- Control MPD from ncmpcpp
-    , ((0, xF86XK_AudioPlay),           spawn "ncmpcpp toggle")
-    , ((0, xF86XK_AudioStop),           spawn "ncmpcpp stop")
-    , ((0, xF86XK_AudioPrev),           spawn "ncmpcpp prev")
-    , ((0, xF86XK_AudioNext),           spawn "ncmpcpp next")
+    , ((0, xF86XK_AudioPlay),           spawn "deadbeef --play-pause")
+    , ((0, xF86XK_AudioStop),           spawn "deadbeef --stop")
+    , ((0, xF86XK_AudioPrev),           spawn "deadbeef --prev")
+    , ((0, xF86XK_AudioNext),           spawn "deadbeef --next")
     
     -- Monitor backlight
     , ((0, xF86XK_MonBrightnessUp),     spawn "xbacklight +20")

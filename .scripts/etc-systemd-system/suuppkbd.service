@@ -1,0 +1,8 @@
+[Unit]
+Description=Поддержка управления подсветкой клавиатуры
+ 
+[Service]
+ExecStart=/home/s-adm/.scripts/support-kb
+ 
+[Install]
+WantedBy=multi-user.target
