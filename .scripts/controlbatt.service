@@ -1,0 +1,8 @@
+[Unit]
+Description=Уведомления о состоянии батареи
+ 
+[Service]
+ExecStart=/home/s-adm/.scripts/controlbatt_and_notify.sh
+ 
+[Install]
+WantedBy=multi-user.target

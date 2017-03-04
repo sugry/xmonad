@@ -23,7 +23,8 @@ setxkbmap -option "grp:caps_toggle,grp_led:caps"
 numlockx &
 perWindowLayoutD & # демон, который запоминает выбранную раскладку для каждого окна http://archlinux.org.ru/forum/topic/3124/
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 3 --transparent true --alpha 0 --tint 0x232323 --height 21 &
-compton &
+compton -b &
+urxvtd -q -f -o &
 # отключаем тачпад во время набора с клавиатуры
 syndaemon -i 2 -d &
 # отключаем тачпад совсем
@@ -33,9 +34,6 @@ xrdb -merge ~/.Xresources &
 parcellite &
 nm-applet &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-# этот скрипт отслеживает состояние заряда батареи и попутно готовит данные для скриптов погоды и проверки обновлений в xmobar
-# не включайте его при слабом интерент соединении
-#$HOME/.scripts/lowbatt_notify.sh &
 
 #feh --bg-center /usr/share/backgrounds/003.jpg
 #dropbox &

@@ -22,7 +22,7 @@ Config {
             , "--low",      "#64FFE0"
         ] 36000
         --, Run Date "%a %b %d %H:%M" "date" 300
-        , Run Network "enp4s0" [
+        , Run Network "wlp3s0" [
             "-t"    ,"<rx> <tx>"
             ,"-H"   ,"200"
             ,"-L"   ,"10"
@@ -73,12 +73,13 @@ Config {
         ] 50
         , Run Com "/home/s-adm/.scripts/xmdate" [] "xmdate" 10
         , Run Com "/home/s-adm/.scripts/xmtime" [] "xmtime" 10
-        , Run Com "/home/s-adm/.scripts/weather" [] "weather" 600
+        , Run Com "/home/s-adm/.scripts/weather.sh" [] "weather" 6000
         , Run Com "/home/s-adm/.scripts/pkg.sh" [] "update" 600
         , Run PipeReader "/tmp/.volume-pipe" "vol"
         , Run UnsafeStdinReader
     ]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = "<fc=#0080FF>λ</fc> %UnsafeStdinReader% }{  <fc=#b4cdcd>%kbd%</fc> :: %enp4s0% ::  <fc=#b4cdcd>%vol%</fc> :: %multicpu% %memory%  %coretemp% :: %battery% :: <fc=#b4cdcd>%weather%</fc> ::  %xmdate%   <fc=#cccccc>%xmtime%</fc> :: <fc=#0080FF>%update%</fc>"
+    , template = "<fc=#0080FF>λ</fc> %UnsafeStdinReader% }{  <fc=#b4cdcd>%kbd%</fc> :: %wlp3s0% ::  <fc=#b4cdcd>%vol%</fc> :: %multicpu% %memory%  %coretemp% :: %battery% :: <fc=#b4cdcd><action=/home/s-adm/.scripts/full-weather.sh>%weather%</action></fc> ::  %xmdate%   <fc=#cccccc>%xmtime%</fc> :: <fc=#0080FF><action=urxvtc -name update -e yaourt -Syua>%update%</action></fc> "
+    
 }

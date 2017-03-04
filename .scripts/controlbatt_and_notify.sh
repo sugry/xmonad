@@ -58,7 +58,7 @@ while :; do
 
 	else
 		# если заряжается и дошло до 99% (больше обычно не поднимается) сообщим о полном заряде
-		if [ "98" -le $BATT_PERCENT ];
+		if [ "99" -le $BATT_PERCENT ];
 			then
 
 				notify-send -u normal -t 5000 -i \
@@ -71,28 +71,6 @@ while :; do
 #	для отладки
 #	echo "Батарея " $BATT_STATUS
     fi
-
-# дополнительно проверим обновления и запишем в промежуточный файл
-# подготовка файла
-cat /dev/null > /home/s-adm/.scripts/pactmp
-pac=$(checkupdates | wc -l)
-
-check=$((pac))
-if [[ "$check" != "0" ]]
-then
-    echo "$pac  pkg" >> /home/s-adm/.scripts/pactmp # пишем информацию в файл для вывода в скрипт xmobar
-else
-    cat /dev/null > /home/s-adm/.scripts/pactmp # очищаем файл
-fi
-
-# дополнительно проверим погоду и запишем в промежуточный файл
-# подготовка файла
-cat /dev/null > /home/s-adm/.scripts/weatmp
-# пишем текст погоды в файл для вывода в скрипт xmobar
-#Search for your city at http://www.accuweather.com and replace the URL in the following script with the URL for your city:
-URL='http://www.accuweather.com/ru/ru/surgut/288459/current-weather/288459'
-wget -q -O- "$URL" | awk -F\' '/acm_RecentLocationsCarousel\.push/{print $10"°", $13}'| head -1 | sed 's/,  text:"//g' | rev | cut -c 5- | rev | sed 's/.*/\L&/' | sed 's/ясно//g' | sed 's/солнечно//g' | sed 's/слабый туман//g' | sed 's/слабый снег и туман/ /g' | sed 's/слабый снегопад//g' | sed 's/небольшой снег//g' | sed 's/снег//g' | sed 's/значительная облачность//g' | sed 's/облачно с прояснениями//g' | sed 's/малооблачно//g' | sed 's/облачно//g' | sed 's/метель//g' >> /home/s-adm/.scripts/weatmp
-#-иконки                  
 
  	sleep $SLEEP_INTERVAL
 
