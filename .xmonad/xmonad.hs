@@ -312,8 +312,8 @@ button9 = 9 :: Button
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
-      ((modm, button5),\_-> nextWS)            -- переключение на след. стол
-    , ((modm, button4),\_-> prevWS)            -- переключение на пред. стол
+      ((modm, button5),\_-> nextWS)            -- переключение на след. workspace
+    , ((modm, button4),\_-> prevWS)            -- переключение на пред. workspace
     , ((modm, button2),\_-> kill)  
     -- Set the window to floating mode and move by dragging
     , ((modm, button1), (\w -> focus w >> mouseMoveWindow w
@@ -321,8 +321,8 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Set the window to floating mode and resize by dragging
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
-    , ((0, button8), (\w -> windows . W.greedyView =<< findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1)) -- go to next workspace
-    , ((0, button9), (\w -> windows . W.greedyView =<< findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1)) -- go to prev workspace
+    , ((0, button8), (\w -> windows . W.greedyView =<< findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1)) -- go to next nonempty workspace
+    , ((0, button9), (\w -> windows . W.greedyView =<< findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1)) -- go to prev nonempty workspace
     ]
     where
       getSortByIndexNoSP =
