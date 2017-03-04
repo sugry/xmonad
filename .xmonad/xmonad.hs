@@ -46,8 +46,10 @@ import XMonad.Layout.Spacing
 
 import Data.Ratio ((%))
 import Data.List (isInfixOf)
+import XMonad.Actions.CycleWS (findWorkspace, nextScreen, prevScreen, swapNextScreen, swapPrevScreen, toggleOrDoSkip, WSType(..))
 import XMonad.Actions.CycleWS (nextWS,prevWS)
 import XMonad.Actions.GridSelect
+import qualified XMonad.Actions.DynamicWorkspaceOrder as DO
 -- import XMonad.Actions.DynamicWorkspaces (addWorkspace) -- for gridselectWorkspace only
 
 -- Java workarounds
@@ -57,6 +59,19 @@ import XMonad.Hooks.SetWMName
 -- classic alt-tab
 --import XMonad.Actions.CycleWindows
 role                 =  stringProperty "WM_WINDOW_ROLE"
+
+getWsCompare' :: X WorkspaceCompare
+getWsCompare' = do
+    wsIndex <- getWsIndex
+    return $ \a b -> f (wsIndex a) (wsIndex b) `mappend` compare a b
+  where
+    f Nothing Nothing   = EQ
+    f (Just _) Nothing  = LT
+    f Nothing (Just _)  = GT
+    f (Just x) (Just y) = compare x y
+
+getSortByIndex' :: X WorkspaceSort
+getSortByIndex' = mkWsSort getWsCompare'
 
 myStartupHook = setWMName "LG3D" <+> setDefaultCursor xC_left_ptr <+> do  spawn "~/.xmonad/getvolume.sh >> /tmp/.volume-pipe"
 
@@ -306,10 +321,14 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Set the window to floating mode and resize by dragging
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
-    -- Change gap
-    , ((0, button8),\_-> sendMessage $ IncGap 5 U) 
-    , ((0, button9),\_-> sendMessage $ DecGap 5 U)            
+    , ((0, button8), (\w -> windows . W.greedyView =<< findWorkspace getSortByIndexNoSP Next HiddenNonEmptyWS 1)) -- go to next workspace
+    , ((0, button9), (\w -> windows . W.greedyView =<< findWorkspace getSortByIndexNoSP Prev HiddenNonEmptyWS 1)) -- go to prev workspace
     ]
+    where
+      getSortByIndexNoSP =
+          fmap (.namedScratchpadFilterOutWorkspace) getSortByIndex'
+      shiftAndView' dir = findWorkspace getSortByIndexNoSP dir AnyWS 1
+                          >>= \t -> (windows . W.shift $ t) >> (windows . W.greedyView $ t)
 
 -- keybindings
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -346,6 +365,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,                xK_p    ), shellPrompt myXPConfig)
     
     , ((modm, xK_1), windows $ W.greedyView $ myWorkspaces !! 0) --focus workspace 1-4
+    
+    , ((modm,              xK_Right  ),     DO.moveTo Next HiddenNonEmptyWS)
+    , ((modm,              xK_Left   ),     DO.moveTo Prev HiddenNonEmptyWS)
 
     -- close focused window
     , ((modm.|. shiftMask, xK_c      ), kill)
