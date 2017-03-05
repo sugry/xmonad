@@ -74,7 +74,7 @@ Config {
         , Run Com "/home/s-adm/.scripts/xmdate" [] "xmdate" 10
         , Run Com "/home/s-adm/.scripts/xmtime" [] "xmtime" 10
         , Run Com "/home/s-adm/.scripts/weather.sh" [] "weather" 120
-        , Run Com "/home/s-adm/.scripts/pkg.sh" [] "update" 3600
+        , Run Com "/home/s-adm/.scripts/pkg.sh" [] "update" 600
         , Run PipeReader "/tmp/.volume-pipe" "vol"
         , Run UnsafeStdinReader
     ]
