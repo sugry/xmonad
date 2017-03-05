@@ -5,6 +5,7 @@ Xft.rgba: rgb
 Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
+
 ! --- cursor ---
 Xcursor.theme: Chameleon-Pearl-Regular-0.5
 
