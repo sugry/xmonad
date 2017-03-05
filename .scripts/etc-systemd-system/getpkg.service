@@ -1,0 +1,9 @@
+[Unit]
+Description=Подготовка данных о количестве обновлений
+ 
+[Service]
+ExecStart=/home/s-adm/.scripts/get-pkg.sh
+ 
+[Install]
+WantedBy=multi-user.target
+

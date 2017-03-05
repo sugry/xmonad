@@ -1,10 +1,4 @@
 #!/bin/bash
 
-pac=$(checkupdates | wc -l)
-
-check=$((pac))
-if [[ "$check" != "0" ]]
-then
-    echo "$pac  pkg"
-fi
+cat /home/s-adm/.scripts/pkgtmp
 
