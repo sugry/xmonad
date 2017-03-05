@@ -57,8 +57,8 @@ while :; do
 
 
 	else
-		# если заряжается и дошло до 99% (больше обычно не поднимается) сообщим о полном заряде
-		if [ "99" -le $BATT_PERCENT ];
+		# если заряжается и дошло до 98% (больше обычно не поднимается) сообщим о полном заряде
+		if [ "98" -le $BATT_PERCENT ];
 			then
 
 				notify-send -u normal -t 5000 -i \
@@ -69,7 +69,7 @@ while :; do
 				sleep $SLEEP_INTERVAL
 		fi
 #	для отладки
-#	echo "Батарея " $BATT_STATUS
+#	echo "Батарея " $BATT_STATUS $BATT_PERCENT
     fi
 
  	sleep $SLEEP_INTERVAL
