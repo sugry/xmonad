@@ -21,20 +21,24 @@ fi
 setxkbmap -layout "us,ru"
 setxkbmap -option "grp:caps_toggle,grp_led:caps"
 numlockx &
-perWindowLayoutD & # демон, который запоминает выбранную раскладку для каждого окна http://archlinux.org.ru/forum/topic/3124/
+perWindowLayoutD & # A daemon that remembers the selected layout for each window http://archlinux.org.ru/forum/topic/3124/
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 3 --transparent true --alpha 0 --tint 0x232323 --height 21 &
 compton -b &
 urxvtd -q -f -o &
-# отключаем тачпад во время набора с клавиатуры
+# Disable the touchpad while typing from the keyboard
 syndaemon -i 2 -d &
-# отключаем тачпад совсем
-# нужно узнать id тачпада командой xinput list
+# Disconnect the touchpad completely
+# You need to know the touchpad id with command xinput list
 # xinput disable 15
-# Контроль состояния батареи
+# Battery status monitoring
 /home/s-adm/.scripts/controlbatt_and_notify.sh &
-# Файл для информации о погоде - создаем/очищаем
+# Checking for updates
+mkfifo /tmp/.getpkg-pipe &
+/home/s-adm/.scripts/get-pkg.sh &
+# Weather
+mkfifo /tmp/.weather-pipe &
 cat /dev/null > /home/s-adm/.scripts/weatmp &
-# /home/s-adm/.scripts/get-weather.sh
+/home/s-adm/.scripts/get-weather.sh &
 
 xrdb -merge ~/.Xresources &
 parcellite &

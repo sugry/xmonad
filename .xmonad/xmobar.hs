@@ -1,6 +1,6 @@
 Config {
     font = "xft:SFN 
-    display:size=11,FontAwesome:size=10" 
+    display:size=11,FontAwesome:size=11" 
     , bgColor = "#232323"
     , fgColor = "#C9A34E"
     , position = TopW L 97
@@ -73,13 +73,14 @@ Config {
         ] 50
         , Run Com "/home/s-adm/.scripts/xmdate" [] "xmdate" 10
         , Run Com "/home/s-adm/.scripts/xmtime" [] "xmtime" 10
-        , Run Com "/home/s-adm/.scripts/weather.sh" [] "weather" 120
-        , Run Com "/home/s-adm/.scripts/pkg.sh" [] "update" 600
+        , Run Com "/home/s-adm/.scripts/logout.sh" [] "logout" 10
         , Run PipeReader "/tmp/.volume-pipe" "vol"
+        , Run PipeReader "/tmp/.getpkg-pipe" "pkg"
+        , Run PipeReader "/tmp/.weather-pipe" "weather"
         , Run UnsafeStdinReader
     ]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = "<fc=#0080FF>λ</fc> %UnsafeStdinReader% }{  <fc=#b4cdcd>%kbd%</fc> :: %wlp3s0% ::  <fc=#b4cdcd>%vol%</fc> :: %multicpu% %memory%  %coretemp% :: %battery% :: <fc=#b4cdcd><action=`/home/s-adm/.scripts/full-weather.sh` button=1><action=`chromium --app=http://www.accuweather.com/ru/ru/surgut/288459/current-weather/288459` button=3>%weather%</action></action></fc> ::  %xmdate%   <fc=#cccccc>%xmtime%</fc> :: <fc=#0080FF><action=`urxvtc -name update -e yaourt -Syua` button=1><action=`xmonad --restart` button=3>%update%</action></action></fc> "
+    , template = "<fc=#0080FF>λ</fc> %UnsafeStdinReader% }{  <fc=#b4cdcd>%kbd%</fc> :: %wlp3s0% ::  <fc=#b4cdcd>%vol%</fc> :: %multicpu% %memory%  %coretemp% :: %battery% :: <fc=#b4cdcd><action=`/home/s-adm/.scripts/full-weather.sh` button=1><action=`chromium --app=http://www.accuweather.com/ru/ru/surgut/288459/current-weather/288459` button=3>%weather%</action></action></fc> ::  %xmdate%   <fc=#cccccc>%xmtime%</fc> :: <action=`oblogout` button=1>%logout%</action> :: <fc=#0080FF><action=`/home/s-adm/.scripts/run-pkg.sh`>%pkg%</action></fc>"
     
 }

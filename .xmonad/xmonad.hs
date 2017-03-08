@@ -73,7 +73,7 @@ getWsCompare' = do
 getSortByIndex' :: X WorkspaceSort
 getSortByIndex' = mkWsSort getWsCompare'
 
-myStartupHook = setWMName "LG3D" <+> setDefaultCursor xC_left_ptr <+> do  spawn "~/.xmonad/getvolume.sh >> /tmp/.volume-pipe"
+myStartupHook = setWMName "LG3D" <+> setDefaultCursor xC_left_ptr <+> do  spawn "~/.xmonad/getvolume.sh >> /tmp/.volume-pipe && echo >> /tmp/.getpkg-pipe"
 
 {-main = do
     spawn "feh --bg-center /usr/share/backgrounds/003.jpg"
@@ -180,7 +180,7 @@ myManageHook = scratchpadManageHook ( W.RationalRect 0.25 0.25 0.5 0.5 ) <+> nam
       ] )
     where    
         bars      = ["dzen2","desktop_window"]
-        float     = ["feh"]
+        float     = ["feh","Oblogout"]
         cfloat    = ["Xmessage","Gxmessage","Eog","Xscreensaver-demo","Brasero","xclock","Xscreensaver-demo","xfreerdp"]
             ++ ["SimpleScreenRecorder","Evolution-alarm-notify","Evolution","Gns3","Mtpaint","Leafpad","Запустить файл","Gpicview"]
             ++ ["pamac-manager","pamac-updater","Deadbeef"]
@@ -313,8 +313,8 @@ button9 = 9 :: Button
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
-      ((modm, button5),\_-> nextWS)            -- переключение на след. workspace
-    , ((modm, button4),\_-> prevWS)            -- переключение на пред. workspace
+      ((modm, button5),\_-> nextWS)            -- go to next workspace
+    , ((modm, button4),\_-> prevWS)            -- go to prev workspace
     , ((modm, button2),\_-> kill)  
     -- Set the window to floating mode and move by dragging
     , ((modm, button1), (\w -> focus w >> mouseMoveWindow w
@@ -446,11 +446,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     
     -- to shutdown  
-    , ((modm .|. shiftMask, xK_F4    ), spawn "/home/s-adm/.scripts/poweroff.sh")
-    -- to restart
-    , ((mod1Mask .|. controlMask, xK_Delete), spawn "/home/s-adm/.scripts/reboot.sh")
+    --, ((modm .|. shiftMask, xK_F4    ), spawn "/home/s-adm/.scripts/poweroff.sh")
+    -- to restart, shutdown, suspend or logout
+    , ((mod1Mask .|. controlMask, xK_Delete), spawn "oblogout")
     -- to suspend
-    , ((modm .|. shiftMask, xK_BackSpace), spawn "/home/s-adm/.scripts/suspend.sh")
+    --, ((modm .|. shiftMask, xK_BackSpace), spawn "/home/s-adm/.scripts/suspend.sh")
 
     -- play youtube videos
     , ((modm              , xK_y     ), spawn "~/bin/zenitube")
