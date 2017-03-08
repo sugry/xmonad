@@ -150,7 +150,7 @@ mynameScratchpads = [ NS "ncmpcpp"      "urxvtc -name ncmpcpp -e ncmpcpp"     (a
                     , NS "font-manager" "font-manager"                        (className  =? "Font-manager") (customFloating $ W.RationalRect 0.2 0.2 0.6 0.6)
 
                     , NS "Organizer"    "Organizer"                           (role       =? "Organizer")    (customFloating $ W.RationalRect 0.1 0.1 0.8 0.8)
-                    , NS "Orage"        "orage"                               (title  =? "Календарь Orage")  (customFloating $ W.RationalRect (8/10) (1/30) (1/8) (4/18))
+                    , NS "Orage"        "orage"                               (title  =? "Календарь Orage")  (customFloating $ W.RationalRect (8/10) (1/30) (1/8) (5/22))
                     , NS "Weather"      "Weather"                             (role       =? "pop-up")       (customFloating $ W.RationalRect 0.15 0.2 0.7 0.6)
                     ]
 
