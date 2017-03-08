@@ -150,6 +150,7 @@ mynameScratchpads = [ NS "ncmpcpp"      "urxvtc -name ncmpcpp -e ncmpcpp"     (a
                     , NS "font-manager" "font-manager"                        (className  =? "Font-manager") (customFloating $ W.RationalRect 0.2 0.2 0.6 0.6)
 
                     , NS "Organizer"    "Organizer"                           (role       =? "Organizer")    (customFloating $ W.RationalRect 0.1 0.1 0.8 0.8)
+                    , NS "Orage"        "orage"                               (title  =? "Календарь Orage")  (customFloating $ W.RationalRect (8/10) (1/30) (1/8) (4/18))
                     , NS "Weather"      "Weather"                             (role       =? "pop-up")       (customFloating $ W.RationalRect 0.15 0.2 0.7 0.6)
                     ]
 
@@ -183,7 +184,7 @@ myManageHook = scratchpadManageHook ( W.RationalRect 0.25 0.25 0.5 0.5 ) <+> nam
         float     = ["feh","Oblogout"]
         cfloat    = ["Xmessage","Gxmessage","Eog","Xscreensaver-demo","Brasero","xclock","Xscreensaver-demo","xfreerdp"]
             ++ ["SimpleScreenRecorder","Evolution-alarm-notify","Evolution","Gns3","Mtpaint","Leafpad","Запустить файл","Gpicview"]
-            ++ ["pamac-manager","pamac-updater","Deadbeef"]
+            ++ ["pamac-manager","pamac-updater","Deadbeef","Orage","Globaltime","Настройки мирового времени"]
         web       = ["Chromium"]
         text      = ["Geany","Atom","Pcmanfm"]
         term      = ["lxterminal"]

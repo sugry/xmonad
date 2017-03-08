@@ -1,15 +1,13 @@
 #!/bin/sh
 
 SLEEP_INTERVAL=60
-while :; do
-
+while :
+do
     TESTHOST="8.8.8.8"
     ping -c 1 -w 5 $TESTHOST &>/dev/null
-
     if [[ $? -ne 0 ]]
         then SLEEP_INTERVAL=3600
         pac=$(checkupdates | wc -l)
-
         check=$((pac))
         if [[ "$check" != "0" ]]
             then
@@ -18,6 +16,5 @@ while :; do
         fi
     else SLEEP_INTERVAL=60
     fi
-    
     sleep $SLEEP_INTERVAL
 done
